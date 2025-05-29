@@ -1,17 +1,20 @@
 import CompanionCard from "@/components/CompanionCard";
 import CompanionsList from "@/components/CompanionsList";
 import CTA from "@/components/CTA";
-import { recentSessions } from "@/constants";
-// import {
-//   getAllCompanions,
-//   getRecentSessions,
-// } from "@/lib/actions/companion.actions";
+import {
+  getAllCompanions,
+  getRecentSessions,
+} from "@/lib/actions/companion.actions";
 import { getSubjectColor } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 const Page = async () => {
-  // const companions = await getAllCompanions({ limit: 3 });
-  const companions = [];
-  // const recentSessionsCompanions = await getRecentSessions(10);
+  const companions = await getAllCompanions({ limit: 3 });
+  const { data: recentSessionsCompanions, error } = await getRecentSessions(10);
+  if (error) {
+    toast.error(`Failed to fetch sessions: ${error}`);
+    return null;
+  }
 
   return (
     <main>
@@ -30,7 +33,7 @@ const Page = async () => {
       <section className="home-section">
         <CompanionsList
           title="Recently completed sessions"
-          companions={recentSessions}
+          companions={recentSessionsCompanions ?? []}
           classNames="w-2/3 max-lg:w-full"
         />
         <CTA />
