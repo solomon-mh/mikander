@@ -9,10 +9,17 @@ import { getSubjectColor } from "@/lib/utils";
 import toast from "react-hot-toast";
 
 const Page = async () => {
-  const companions = await getAllCompanions({ limit: 3 });
+  const { data: companions, error: getAllCompanyError } =
+    await getAllCompanions({
+      limit: 3,
+    });
   const { data: recentSessionsCompanions, error } = await getRecentSessions(10);
   if (error) {
     toast.error(`Failed to fetch sessions: ${error}`);
+    return null;
+  }
+  if (getAllCompanyError) {
+    toast.error(`Failed to fetch sessions: ${getAllCompanyError}`);
     return null;
   }
 
@@ -21,7 +28,7 @@ const Page = async () => {
       <h1>Popular Companions</h1>
 
       <section className="home-section">
-        {companions.map((companion) => (
+        {companions?.map((companion) => (
           <CompanionCard
             key={companion.id}
             {...companion}
