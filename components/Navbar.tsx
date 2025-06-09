@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 
 const Navbar = () => {
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/x";
+  const redirectTo = searchParams.get("redirectTo") || "/";
   console.log(redirectTo);
 
   return (
