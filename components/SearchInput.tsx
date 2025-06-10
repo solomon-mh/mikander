@@ -3,38 +3,39 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-// import {formUrlQuery, removeKeysFromUrlQuery} from "@jsmastery/utils";
+import { formUrlQuery, removeKeysFromUrlQuery } from "@/lib/search-param-utils";
 
 const SearchInput = () => {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = searchParams.get("topic") || "";
+  const query = searchParams.get("topic");
 
-  const [searchQuery, setSearchQuery] = useState("");
+  // ✅ Initialize from URL so state matches search param
+  const [searchQuery, setSearchQuery] = useState(query || "");
 
-  // useEffect(() => {
-  //     const delayDebounceFn = setTimeout(() => {
-  //         if(searchQuery) {
-  //             const newUrl = formUrlQuery({
-  //                 params: searchParams.toString(),
-  //                 key: "topic",
-  //                 value: searchQuery,
-  //             });
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchQuery.trim()) {
+        const newUrl = formUrlQuery({
+          params: searchParams.toString(),
+          key: "topic",
+          value: searchQuery.trim(),
+        });
 
-  //             router.push(newUrl, { scroll: false });
-  //         } else {
-  //             if(pathname === '/companions') {
-  //                 const newUrl = removeKeysFromUrlQuery({
-  //                     params: searchParams.toString(),
-  //                     keysToRemove: ["topic"],
-  //                 });
+        router.push(`${pathname}${newUrl}`, { scroll: false });
+      } else {
+        const newUrl = removeKeysFromUrlQuery({
+          params: searchParams.toString(),
+          keysToRemove: ["topic"],
+        });
 
-  //                 router.push(newUrl, { scroll: false });
-  //             }
-  //         }
-  //     }, 500)
-  // }, [searchQuery, router, searchParams, pathname]);
+        router.push(`${pathname}${newUrl}`, { scroll: false });
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery, router, searchParams, pathname]);
 
   return (
     <div className="relative border border-black rounded-lg items-center flex gap-2 px-2 py-1 h-fit">
@@ -48,4 +49,5 @@ const SearchInput = () => {
     </div>
   );
 };
+
 export default SearchInput;
