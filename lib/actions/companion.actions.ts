@@ -43,9 +43,11 @@ export const getAllCompanions = async ({
 
   const { data: companions, error } = await query;
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    return { data: null, error: error?.message };
+  }
 
-  return companions;
+  return { data: companions, error: null };
 };
 
 export const getCompanion = async (id: string) => {
@@ -118,6 +120,9 @@ export const getUserCompanions = async (userId: string) => {
 export const newCompanionPermissions = async () => {
   const { userId, has } = await auth();
   const supabase = createSupabaseClient();
+  console.log(has({ feature: "3_companion_limit" }));
+  console.log(has({ feature: "10_companion_limit" }));
+  console.log(has({ plan: "pro" }));
 
   let limit = 0;
 
