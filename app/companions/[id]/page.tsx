@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { getSubjectColor } from "@/lib/utils";
 import Image from "next/image";
 import CompanionComponent from "@/components/CompanionComponent";
-import toast from "react-hot-toast";
 
 interface CompanionSessionPageProps {
   params: Promise<{ id: string }>;
@@ -15,28 +14,7 @@ const CompanionSession = async ({ params }: CompanionSessionPageProps) => {
   const companion = await getCompanion(id);
   const user = await currentUser();
 
-  interface CompanionData {
-    name: string;
-    subject: string;
-    topic: string;
-    duration: number;
-    [key: string]: unknown;
-  }
-
-  interface CompanionResponse {
-    data: CompanionData | null;
-    error?: string | null;
-  }
-
-  const { data, error }: CompanionResponse = companion;
-  if (error && !data) {
-    toast.error("an error occured" + error);
-  }
-  if (!data) {
-    if (!user) redirect("/sign-in");
-    redirect("/companions");
-  }
-  const { name, subject, topic, duration } = data;
+  const { name, subject, topic, duration } = companion;
 
   if (!user) redirect("/sign-in");
   if (!name) redirect("/companions");
