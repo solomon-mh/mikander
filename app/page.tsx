@@ -15,11 +15,11 @@ const Page = async () => {
     });
   const { data: recentSessionsCompanions, error } = await getRecentSessions(10);
   if (error) {
-    toast.error(`Failed to fetch sessions: ${error}`);
+    toast(`Failed to fetch sessions: ${error}`);
     return null;
   }
   if (getAllCompanyError) {
-    toast.error(`Failed to fetch sessions: ${getAllCompanyError}`);
+    toast(`Failed to fetch sessions: ${getAllCompanyError}`);
     return null;
   }
 
