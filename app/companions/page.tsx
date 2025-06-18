@@ -15,7 +15,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
     topic,
   });
   if (error) {
-    toast.error(`Failed to fetch sessions: ${error}`);
+    toast(`Failed to fetch sessions: ${error}`);
     return null;
   }
   return (
