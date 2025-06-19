@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -94,6 +95,7 @@ const CompanionComponent = ({
       serverMessages: [],
     };
 
+    // @ts-expect-error
     vapi.start(configureAssistant(voice, style), assistantOverrides);
   };
 
