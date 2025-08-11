@@ -24,6 +24,8 @@ import { subjects } from "@/constants";
 import { Textarea } from "@/components/ui/textarea";
 import { createCompanion } from "@/lib/actions/companion.actions";
 import { redirect } from "next/navigation";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Companion is required." }),
@@ -35,6 +37,7 @@ const formSchema = z.object({
 });
 
 const CompanionForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,12 +51,14 @@ const CompanionForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
     const companion = await createCompanion(values);
-
     if (companion) {
+      setIsLoading(false);
       redirect(`/companions/${companion.id}`);
     } else {
       console.log("Failed to create a companion");
+      setIsLoading(false);
       redirect("/");
     }
   };
@@ -191,14 +196,24 @@ const CompanionForm = () => {
                   placeholder="15"
                   {...field}
                   className="input"
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    field.onChange(value === "" ? "" : Number(value));
+                  }}
                 />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full cursor-pointer">
-          Build Your Companion
+        <Button
+          type="submit"
+          className={cn(
+            "w-full cursor-pointer",
+            isLoading && "cursor-not-allowed"
+          )}
+        >
+          {!isLoading ? "Build Your Companion" : "Building Your Companion ..."}
         </Button>
       </form>
     </Form>
