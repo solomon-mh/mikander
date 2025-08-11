@@ -25,9 +25,12 @@ export const getAllCompanions = async ({
   subject,
   topic,
 }: GetAllCompanions) => {
+  const { userId } = await auth();
+  if (!userId) {
+    return { data: [] };
+  }
   const supabase = createSupabaseClient();
-
-  let query = supabase.from("companions").select();
+  let query = supabase.from("companions").select().eq("author", userId);
 
   if (subject && topic) {
     query = query
@@ -77,10 +80,12 @@ export const addToSessionHistory = async (companionId: string) => {
 };
 
 export const getRecentSessions = async (limit = 10) => {
+  const { userId } = await auth();
   const supabase = createSupabaseClient();
   const { data, error } = await supabase
     .from("session_history")
     .select(`companions:companion_id (*)`)
+    .eq("user_id", userId)
     .order("created_at", { ascending: false })
     .limit(limit);
 
