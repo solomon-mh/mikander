@@ -1,9 +1,14 @@
 "use client";
-import { removeBookmark } from "@/lib/actions/companion.actions";
+import {
+  getBookmarkedCompanions,
+  removeBookmark,
+} from "@/lib/actions/companion.actions";
 import { addBookmark } from "@/lib/actions/companion.actions";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface CompanionCardProps {
   id: string;
@@ -12,7 +17,6 @@ interface CompanionCardProps {
   subject: string;
   duration: number;
   color: string;
-  bookmarked: boolean;
 }
 
 const CompanionCard = ({
@@ -22,13 +26,31 @@ const CompanionCard = ({
   subject,
   duration,
   color,
-  bookmarked,
 }: CompanionCardProps) => {
+  const { user } = useUser();
+
+  const [bookmarked, setBookMarked] = useState(false);
+  useEffect(() => {
+    async function fetchBookMarks() {
+      if (!user) return;
+      const rawBookMarks: Array<{ id: string }>[] =
+        await getBookmarkedCompanions(user?.id);
+      // Flatten and map to objects with id property
+      const bookMarks: { id: string }[] = rawBookMarks
+        .flat()
+        .map((bkm) => ({ id: bkm.id }));
+      const isBookmarked = bookMarks.some((bkm) => id === bkm.id);
+      setBookMarked(isBookmarked);
+    }
+    fetchBookMarks();
+  });
   const pathname = usePathname();
   const handleBookmark = async () => {
     if (bookmarked) {
       await removeBookmark(id, pathname);
+      setBookMarked(false);
     } else {
+      setBookMarked(true);
       await addBookmark(id, pathname);
     }
   };
