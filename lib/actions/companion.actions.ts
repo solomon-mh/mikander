@@ -168,8 +168,8 @@ export const addBookmark = async (companionId: string, path: string) => {
     throw new Error(error.message);
   }
   // Revalidate the path to force a re-render of the page
-
   revalidatePath(path);
+
   return data;
 };
 
