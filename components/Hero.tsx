@@ -88,12 +88,12 @@ const HeroSection = () => {
             whileHover={{ scale: 1.03 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="relative">
+            <div className="relative p-12">
               {/* Radiant shadow background */}
               <div className="absolute inset-0 overflow-hidden rounded-full">
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
                   <div
-                    className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 opacity-20 rounded-full filter blur-3xl"
+                    className="absolute inset-0 bg-radial from-gray-100 via-gray-300 to-gray-50 opacity-20 rounded-full filter blur-3xl"
                     style={{
                       width: "450%",
                       height: "450%",
