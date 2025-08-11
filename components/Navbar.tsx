@@ -5,6 +5,7 @@ import Image from "next/image";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import NavItems from "@/components/NavItems";
 import { useSearchParams } from "next/navigation";
+import ThemeToggle from "./DarkModeToggler";
 
 const Navbar = () => {
   const searchParams = useSearchParams();
@@ -30,6 +31,7 @@ const Navbar = () => {
         <SignedIn>
           <UserButton />
         </SignedIn>
+        <ThemeToggle />
       </div>
     </nav>
   );
