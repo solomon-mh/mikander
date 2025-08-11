@@ -8,6 +8,7 @@ import Image from "next/image";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
 import soundwaves from "@/constants/soundwaves.json";
 import { addToSessionHistory } from "@/lib/actions/companion.actions";
+import toast from "react-hot-toast";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -46,9 +47,15 @@ const CompanionComponent = ({
   useEffect(() => {
     const onCallStart = () => setCallStatus(CallStatus.ACTIVE);
 
-    const onCallEnd = () => {
+    const onCallEnd = async () => {
       setCallStatus(CallStatus.FINISHED);
-      addToSessionHistory(companionId);
+      try {
+        await addToSessionHistory(companionId);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error("an error occurred" + error.message);
+        }
+      }
     };
 
     const onMessage = (message: Message) => {
