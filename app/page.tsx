@@ -13,7 +13,6 @@ import AddMoreCompanion from "@/components/AddMoreCompanion";
 
 const Page = async () => {
   const { userId } = await auth();
-
   const { data: companions, error: getAllCompanyError } =
     await getAllCompanions({
       limit: 3,
