@@ -9,7 +9,6 @@ import { useSearchParams } from "next/navigation";
 const Navbar = () => {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
-  console.log(redirectTo);
 
   return (
     <nav className="navbar">
