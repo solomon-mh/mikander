@@ -65,13 +65,18 @@ const CompanionForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 text-gray-800"
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Companion name</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                Companion name
+              </FormLabel>
               <FormControl>
                 <Input
                   placeholder="Enter the companion name"
@@ -88,7 +93,9 @@ const CompanionForm = () => {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Subject</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                Subject
+              </FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -120,7 +127,9 @@ const CompanionForm = () => {
           name="topic"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>What should the companion help with?</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                What should the companion help with?
+              </FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Ex. Derivates & Integrals"
@@ -138,7 +147,9 @@ const CompanionForm = () => {
           name="voice"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Voice</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                Voice
+              </FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -163,7 +174,9 @@ const CompanionForm = () => {
           name="style"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Style</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                Style
+              </FormLabel>
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
@@ -189,7 +202,9 @@ const CompanionForm = () => {
           name="duration"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Estimated session duration in minutes</FormLabel>
+              <FormLabel className="text-black dark:text-gray-100">
+                Estimated session duration in minutes
+              </FormLabel>
               <FormControl>
                 <Input
                   type="number"
