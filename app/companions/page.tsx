@@ -38,11 +38,16 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
             />
           ))
         ) : (
-          <p className="mt-24 mx-auto text-center text-lg text-gray-500 font-medium bg-gradient-to-r from-pink-700 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-pulse">
-            No Companions found for{" "}
-            <span className="font-semibold">{topic || ""}</span>{" "}
-            <span className="font-semibold">{subject || ""}</span>
-          </p>
+          <>
+            {topic ||
+              (subject && (
+                <p className="mt-24 mx-auto text-center text-lg text-gray-500 font-medium bg-gradient-to-r from-pink-700 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-pulse">
+                  No Companions found for{" "}
+                  <span className="font-semibold">{topic || ""}</span>{" "}
+                  <span className="font-semibold">{subject || ""}</span>
+                </p>
+              ))}
+          </>
         )}
       </section>
       <AddMoreCompanion />
