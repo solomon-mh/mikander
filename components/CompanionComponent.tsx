@@ -177,6 +177,7 @@ const CompanionComponent = ({
               alt="mic"
               width={36}
               height={36}
+              className="dark:bg-gray-100 rounded-xl"
             />
             <p className="max-sm:hidden text-gray-800 dark:text-gray-200">
               {isMuted ? "Turn on microphone" : "Turn off microphone"}
@@ -184,7 +185,7 @@ const CompanionComponent = ({
           </button>
           <button
             className={cn(
-              "rounded-lg py-2 cursor-pointer transition-colors w-full bg-dark text-white dark:bg-gray-700",
+              "rounded-lg py-2 cursor-pointer transition-colors w-full bg-black text-white dark:bg-gray-700",
               callStatus === CallStatus.ACTIVE ? "bg-red-700" : "",
               callStatus === CallStatus.CONNECTING && "animate-pulse"
             )}
