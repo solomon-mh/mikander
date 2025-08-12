@@ -201,7 +201,7 @@ const CompanionComponent = ({
         </div>
       </section>
 
-      <section className="transcript">
+      <section className="transcript py-4 mb-12">
         <div className="transcript-message no-scrollbar">
           {messages.map((message, index) => {
             if (message.role === "assistant") {
@@ -226,8 +226,6 @@ const CompanionComponent = ({
             }
           })}
         </div>
-
-        <div className="transcript-fade" />
       </section>
     </section>
   );
