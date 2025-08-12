@@ -178,14 +178,14 @@ const CompanionComponent = ({
               width={36}
               height={36}
             />
-            <p className="max-sm:hidden">
+            <p className="max-sm:hidden text-gray-800 dark:text-gray-200">
               {isMuted ? "Turn on microphone" : "Turn off microphone"}
             </p>
           </button>
           <button
             className={cn(
-              "rounded-lg py-2 cursor-pointer transition-colors w-full text-white",
-              callStatus === CallStatus.ACTIVE ? "bg-red-700" : "bg-primary",
+              "rounded-lg py-2 cursor-pointer transition-colors w-full bg-dark text-white dark:bg-gray-700",
+              callStatus === CallStatus.ACTIVE ? "bg-red-700" : "",
               callStatus === CallStatus.CONNECTING && "animate-pulse"
             )}
             onClick={
@@ -206,14 +206,20 @@ const CompanionComponent = ({
           {messages.map((message, index) => {
             if (message.role === "assistant") {
               return (
-                <p key={index} className="max-sm:text-sm">
+                <p
+                  key={index}
+                  className="max-sm:text-sm text-gray-800 dark:text-gray-200"
+                >
                   {name.split(" ")[0].replace("/[.,]/g, ", "")}:{" "}
                   {message.content}
                 </p>
               );
             } else {
               return (
-                <p key={index} className="text-primary max-sm:text-sm">
+                <p
+                  key={index}
+                  className="text-gray-800 dark:text-gray-200 max-sm:text-sm"
+                >
                   {userName}: {message.content}
                 </p>
               );
