@@ -14,5 +14,5 @@ export default function AuthRedirect() {
     }
   }, [isSignedIn, router]);
 
-  return null; // This component renders nothing
+  return null;
 }
