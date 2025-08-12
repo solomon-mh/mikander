@@ -8,8 +8,11 @@ import { useSearchParams } from "next/navigation";
 import ThemeToggle from "./DarkModeToggler";
 
 const Navbar = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
+  const forceRedirectUrl = `${baseUrl}/${redirectTo}`;
+  const fallbackRedirectUrl = `${baseUrl}/${redirectTo}`;
 
   return (
     <nav className="navbar">
@@ -22,8 +25,8 @@ const Navbar = () => {
         <NavItems />
         <SignedOut>
           <SignInButton
-            forceRedirectUrl={`$http://localhost:3000/${redirectTo}`}
-            fallbackRedirectUrl={`$http://localhost:3000/${redirectTo}`}
+            forceRedirectUrl={forceRedirectUrl}
+            fallbackRedirectUrl={fallbackRedirectUrl}
           >
             <button className="btn-signin">Sign In</button>
           </SignInButton>
