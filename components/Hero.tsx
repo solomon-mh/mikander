@@ -27,7 +27,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative overflow-hidden  text-gray-900 py-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden  text-gray-900 dark:text-gray-200 py-20 px-4 sm:px-6 lg:px-8">
       <div className="relative max-w-7xl mx-auto">
         <motion.div
           initial="hidden"
@@ -56,7 +56,7 @@ const HeroSection = () => {
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg md:text-xl text-gray-600 max-w-2xl"
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-200 max-w-2xl"
             >
               Pick a name, subject, voice, & personality — and start learning
               through voice conversations that feel natural and fun.
@@ -89,21 +89,6 @@ const HeroSection = () => {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <div className="relative p-12">
-              {/* Radiant shadow background */}
-              <div className="absolute inset-0 overflow-hidden rounded-full">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full">
-                  <div
-                    className="absolute inset-0 bg-radial from-gray-100 via-gray-300 to-gray-50 opacity-20 rounded-full filter blur-3xl"
-                    style={{
-                      width: "450%",
-                      height: "450%",
-                      //   marginLeft: "-25%",
-                      //   marginTop: "-25%",
-                    }}
-                  />
-                </div>
-              </div>
-
               {/* Image with subtle glow */}
               <div className="relative z-10">
                 <Image
@@ -111,7 +96,7 @@ const HeroSection = () => {
                   alt="Learning Companion"
                   width={500}
                   height={400}
-                  className="w-full h-auto drop-shadow-lg"
+                  className="w-full h-auto drop-shadow-xl"
                 />
               </div>
             </div>
