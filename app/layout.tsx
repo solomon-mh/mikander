@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bricolage.variable} antialiased`}>
         <ClerkProvider appearance={{ variables: { colorPrimary: "#fe5933" } }}>
-          <Navbar />
+          <Suspense fallback={null}>
+            <Navbar />
+          </Suspense>
           {children}
           <Toaster position="top-right" reverseOrder={false} />
         </ClerkProvider>
