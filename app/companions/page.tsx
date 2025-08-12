@@ -3,7 +3,6 @@ import CompanionCard from "@/components/CompanionCard";
 import { getSubjectColor } from "@/lib/utils";
 import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
-import toast from "react-hot-toast";
 import AddMoreCompanion from "@/components/AddMoreCompanion";
 
 const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
@@ -16,7 +15,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
     topic,
   });
   if (error) {
-    toast(`Failed to fetch sessions: ${error}`);
+    console.log(`Failed to fetch sessions: ${error}`);
     return null;
   }
   return (
