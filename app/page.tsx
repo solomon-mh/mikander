@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import AddMoreCompanion from "@/components/AddMoreCompanion";
+import AuthRedirect from "@/components/AuthRedirect";
 
 const Page = async () => {
   const { userId } = await auth();
@@ -29,6 +30,7 @@ const Page = async () => {
 
   return (
     <main>
+      <AuthRedirect />
       {userId ? (
         <>
           {companions && companions?.length > 0 ? (
